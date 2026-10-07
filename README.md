@@ -20,9 +20,9 @@ mateus@github:~$ whoami
   <tr>
     <td valign="top">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./assets/ascii-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="./assets/ascii-light.svg">
-        <img src="./assets/ascii-dark.svg" width="350" alt="ASCII portrait status for Mateus Menezes.">
+        <source media="(prefers-color-scheme: dark)" srcset="./assets/ascii-v2-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="./assets/ascii-v2-light.svg">
+        <img src="./assets/ascii-v2-dark.svg" width="350" alt="ASCII portrait status for Mateus Menezes.">
       </picture>
     </td>
     <td valign="top">

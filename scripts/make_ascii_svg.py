@@ -149,8 +149,8 @@ def main() -> int:
         print(f"Generated {args.preview}")
     else:
         for theme in THEMES:
-            (destination / f"ascii-{theme}.svg").write_text(render(lines, theme, static), encoding="utf-8")
-        print("Generated assets/ascii-dark.svg and assets/ascii-light.svg")
+            (destination / f"ascii-v2-{theme}.svg").write_text(render(lines, theme, static), encoding="utf-8")
+        print("Generated assets/ascii-v2-dark.svg and assets/ascii-v2-light.svg")
     print(f"Face detection: {face or 'fallback crop'}; grid: {args.columns}x{len(lines)}")
     return 0
 
