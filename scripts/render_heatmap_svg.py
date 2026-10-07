@@ -51,7 +51,7 @@ def main() -> None:
     payload = json.loads(DATA.read_text(encoding="utf-8"))
     ASSETS.mkdir(exist_ok=True)
     for name in THEMES:
-        (ASSETS / f"heatmap-{name}.svg").write_text(svg_for(payload, name), encoding="utf-8")
+        (ASSETS / f"heatmap-v2-{name}.svg").write_text(svg_for(payload, name), encoding="utf-8")
 
 
 if __name__ == "__main__":

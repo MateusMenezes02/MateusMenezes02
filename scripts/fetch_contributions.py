@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+import argparse
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
@@ -16,6 +17,16 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "contributions.json"
 URL = "https://github.com/users/{username}/contributions"
 DEFAULT_USERNAME = "MateusMenezes02"
+
+
+def parse_contribution_count(label: str) -> int:
+    """Extract an exact daily count from GitHub's accessible tooltip text."""
+    if re.fullmatch(r"No contributions on .+\.", label):
+        return 0
+    match = re.fullmatch(r"(\d+) contributions? on .+\.", label)
+    if not match:
+        raise ValueError(f"Unrecognized contribution tooltip: {label!r}")
+    return int(match.group(1))
 
 
 def parse_contributions(html: str) -> list[dict[str, object]]:
@@ -40,8 +51,9 @@ def parse_contributions(html: str) -> list[dict[str, object]]:
         label = tooltip_text.get(cell_id, cell.get("aria-label", ""))
         if not label:
             raise ValueError(f"No accessible contribution total for {raw_date}; GitHub HTML may have changed.")
-        match = re.search(r"(\d+) contributions?", label)
-        count = int(match.group(1)) if match else 0
+        # data-level is only a 0–4 colour intensity. Counts always come from
+        # the tooltip associated with this exact calendar-cell id.
+        count = parse_contribution_count(label)
         try:
             parsed = date.fromisoformat(raw_date)
             level = int(raw_count)
@@ -80,6 +92,9 @@ def calculate_stats(days: list[dict[str, object]]) -> dict[str, object]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="Fetch GitHub contribution calendar data.")
+    parser.add_argument("--debug", action="store_true", help="Print parsed contribution diagnostics.")
+    args = parser.parse_args()
     username = os.environ.get("GITHUB_USERNAME", DEFAULT_USERNAME).strip()
     try:
         response = requests.get(URL.format(username=username), headers={"User-Agent": "profile-readme-updater/1.0"}, timeout=20)
@@ -94,6 +109,13 @@ def main() -> int:
     temporary = OUTPUT.with_suffix(".tmp")
     temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     temporary.replace(OUTPUT)
+    if args.debug:
+        positive = [day for day in days if int(day["count"]) > 0]
+        soup = BeautifulSoup(response.text, "html.parser")
+        print(f"Parsed {len(days)} days; tooltips: {len(soup.select('tool-tip[for]'))}")
+        print(f"Positive days: {len(positive)}; total contributions: {payload['stats']['total']}")
+        for day in positive:
+            print(f"{day['date']}: {day['count']}")
     print(f"Saved {len(days)} days for @{username} to {OUTPUT.relative_to(ROOT)}")
     return 0
 

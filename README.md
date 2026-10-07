@@ -5,9 +5,9 @@
 `LMS / Moodle Analyst` · `Python Automation` · `Backend` · `Applied AI`
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/heatmap-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/heatmap-light.svg">
-  <img src="./assets/heatmap-dark.svg" width="860" alt="GitHub contribution activity for MateusMenezes02.">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/heatmap-v2-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/heatmap-v2-light.svg">
+  <img src="./assets/heatmap-v2-dark.svg" width="860" alt="GitHub contribution activity for MateusMenezes02.">
 </picture>
 
 </div>

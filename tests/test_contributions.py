@@ -41,6 +41,22 @@ def test_parser_uses_tooltip_totals():
     assert parsed[1]["count"] == 0
 
 
+def test_tooltip_counts_are_exact_and_never_derived_from_level():
+    assert fetch.parse_contribution_count("No contributions on January 1st.") == 0
+    assert fetch.parse_contribution_count("1 contribution on January 2nd.") == 1
+    assert fetch.parse_contribution_count("6 contributions on January 3rd.") == 6
+    html = "".join(
+        f'<td class="ContributionCalendar-day" id="d{i}" data-date="{date(2025, 1, 1) + timedelta(days=i)}" data-level="4"></td>'
+        for i in range(350)
+    ) + '<tool-tip for="d0">6 contributions on January 1st.</tool-tip>' + "".join(
+        f'<tool-tip for="d{i}">No contributions on January {i}th.</tool-tip>' for i in range(1, 350)
+    )
+    parsed = fetch.parse_contributions(html)
+    assert parsed[0]["level"] == 4
+    assert parsed[0]["count"] == 6
+    assert sum(int(day["count"]) for day in parsed) == 6
+
+
 def test_heatmap_svg_uses_levels_and_accessible_summary():
     payload = {"days": days([0, 1, 2, 3, 4]), "stats": fetch.calculate_stats(days([0, 1, 2, 3, 4]))}
     svg = render.svg_for(payload, "dark")
