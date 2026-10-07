@@ -1,4 +1,6 @@
 -r requirements.txt
 pillow>=10,<12
 numpy>=1.26,<3
-# Optional: rembg and opencv-python may be installed locally for advanced photo cleanup.
+# Optional local enhancements (the pipeline remains functional without either):
+# rembg>=2.0,<3
+# opencv-python>=4.9,<5
