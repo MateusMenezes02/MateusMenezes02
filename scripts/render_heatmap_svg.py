@@ -17,15 +17,27 @@ THEMES = {
 }
 
 
+def calendar_start(dates: list[str]) -> date:
+    """Return the Sunday that starts GitHub's first visible calendar week."""
+    if not dates:
+        raise ValueError("contributions.json has no days")
+    first = date.fromisoformat(min(dates))
+    return first - timedelta(days=(first.weekday() + 1) % 7)
+
+
+def grid_position(day: date, start: date) -> tuple[int, int]:
+    """Map a date to GitHub's Sunday-first week column and day row."""
+    offset = (day - start).days
+    if offset < 0:
+        raise ValueError(f"{day} predates heatmap start {start}")
+    return offset // 7, (day.weekday() + 1) % 7
+
+
 def svg_for(payload: dict, theme_name: str) -> str:
     t = THEMES[theme_name]
     day_map = {d["date"]: d for d in payload.get("days", [])}
     dates = sorted(day_map)
-    if not dates:
-        raise ValueError("contributions.json has no days")
-    end = date.fromisoformat(dates[-1])
-    start = end - timedelta(days=370)
-    start -= timedelta(days=(start.weekday() + 1) % 7)  # Sunday-aligned calendar
+    start = calendar_start(dates)
     cells = []
     for week in range(53):
         for row in range(7):

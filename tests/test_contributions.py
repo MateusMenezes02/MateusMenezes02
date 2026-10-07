@@ -64,3 +64,15 @@ def test_heatmap_svg_uses_levels_and_accessible_summary():
     assert "GitHub contribution activity" in svg
     assert render.THEMES["dark"]["empty"] in svg
     assert render.THEMES["dark"]["levels"][3] in svg
+
+
+def test_github_sunday_first_grid_mapping_for_known_active_days():
+    start = render.calendar_start(["2025-10-05", "2026-10-07"])
+    assert start == date(2025, 10, 5)
+    assert render.grid_position(date(2026, 10, 6), start) == (52, 2)  # Tuesday
+    assert render.grid_position(date(2026, 10, 7), start) == (52, 3)  # Wednesday
+
+
+def test_calendar_start_does_not_shift_when_latest_day_is_midweek():
+    start = render.calendar_start(["2025-10-05", "2026-10-07"])
+    assert render.grid_position(date(2025, 10, 5), start) == (0, 0)

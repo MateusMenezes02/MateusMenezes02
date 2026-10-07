@@ -64,7 +64,7 @@ def parse_contributions(html: str) -> list[dict[str, object]]:
         days.append({"date": parsed.isoformat(), "count": count, "level": level})
     if len(days) < 350:
         raise ValueError(f"Only {len(days)} calendar days were parsed; refusing incomplete data.")
-    return days
+    return sorted(days, key=lambda day: str(day["date"]))
 
 
 def calculate_stats(days: list[dict[str, object]]) -> dict[str, object]:
@@ -115,7 +115,7 @@ def main() -> int:
         print(f"Parsed {len(days)} days; tooltips: {len(soup.select('tool-tip[for]'))}")
         print(f"Positive days: {len(positive)}; total contributions: {payload['stats']['total']}")
         for day in positive:
-            print(f"{day['date']}: {day['count']}")
+            print(f"{day['date']} -> count {day['count']} -> level {day['level']}")
     print(f"Saved {len(days)} days for @{username} to {OUTPUT.relative_to(ROOT)}")
     return 0
 
