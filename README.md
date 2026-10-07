@@ -1,67 +1,94 @@
-# 👋 Olá, eu sou Mateus Menezes
+<div align="center">
 
-🎓 Formado em **Ciência da Computação** e apaixonado por tecnologia, desenvolvimento de software e inteligência artificial.
+# Mateus Menezes
 
-Atualmente, trabalho e desenvolvo projetos envolvendo **desenvolvimento web, automação de processos, inteligência artificial e soluções digitais**.
+`LMS / Moodle Analyst` · `Python Automation` · `Backend` · `Applied AI`
 
-## 🚀 Sobre mim
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/heatmap-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/heatmap-light.svg">
+  <img src="./assets/heatmap-dark.svg" width="860" alt="GitHub contribution activity for MateusMenezes02.">
+</picture>
 
-* 💻 Desenvolvedor com foco em **Web, Software e IA**
-* 🤖 Desenvolvimento de projetos utilizando **Inteligência Artificial e Machine Learning**
-* 🌐 Experiência com **Front-end e aplicações web**
-* ⚙️ Desenvolvimento de **automações e ferramentas para processos**
-* 🎓 Projetos e soluções voltados para **Moodle, educação e gestão de conteúdo**
-* 📊 Interesse em **dados, análise e sistemas inteligentes**
-* 🧠 Sempre buscando transformar ideias e problemas reais em soluções utilizando tecnologia
+</div>
 
-## 🛠️ Tecnologias & Ferramentas
+```sh
+mateus@github:~$ whoami
+```
 
-**Linguagens**
+<table>
+  <tr>
+    <td valign="top">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./assets/ascii-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="./assets/ascii-light.svg">
+        <img src="./assets/ascii-dark.svg" width="350" alt="ASCII portrait status for Mateus Menezes.">
+      </picture>
+    </td>
+    <td valign="top">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./assets/info-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="./assets/info-light.svg">
+        <img src="./assets/info-dark.svg" width="510" alt="Technical profile: LMS and Moodle, Python automation, backend, and applied AI.">
+      </picture>
+    </td>
+  </tr>
+</table>
 
-* Python
-* JavaScript
-* HTML5
-* CSS
+```sh
+mateus@github:~$ ls ./projects
+```
 
-**Desenvolvimento**
+### 01 — Moodle Automation
 
-* React
-* Node.js
-* Git & GitHub
-* APIs e integrações
-* Desenvolvimento de aplicações web
+`Python` · `Playwright` · `Moodle`
 
-**IA & Dados**
+Automation for repetitive LMS operations: users, courses, enrollments, groups, reports, and academic workflows. Built around practical educational processes, data handling, and reducing manual work.
 
-* Machine Learning
-* Análise de dados
-* Automação com Python
-* Desenvolvimento de sistemas baseados em IA
+### 02 — DoraVet AI Assistant
 
-**Outros**
+`FastAPI` · `SQLite` · `WhatsApp Cloud API` · `Conversational logic`
 
-* Moodle
-* GIFT / gerenciamento de bancos de questões
-* Automação de processos
-* Integrações com APIs
-* Banco de dados
+Conversational assistant for a veterinary business, covering customers and pets, appointment requests, service information, and human handoff. Designed with conversation state, idempotency, triage without diagnosis, and WhatsApp integration.
 
-## 📌 Projetos
+### 03 — Football Value AI
 
-Alguns dos projetos que venho desenvolvendo envolvem:
+`Python` · `FastAPI` · `PostgreSQL` · `SQLAlchemy` · `Next.js` · `ML` · `Docker`
 
-* 🤖 **Aplicações utilizando Inteligência Artificial**
-* 📈 **Sistemas de análise de dados e mercado**
-* 🐾 **Aplicações voltadas para o universo pet**
-* 🌐 **Sites e soluções digitais para empresas e negócios locais**
-* ⚙️ **Automação de processos e tarefas repetitivas**
-* 🎓 **Ferramentas e soluções para ambientes educacionais e Moodle**
+Football analytics platform for estimating fair odds, expected value, and opportunities through statistical modelling. Includes Poisson and Elo models, logistic regression, calibration, temporal data, backtesting, data validation, caching, rate limiting, and circuit breaking.
 
-## 🎯 Atualmente
+### 04 — Completion Detective
 
-Estou focado em evoluir cada vez mais como desenvolvedor, criando **produtos, automações e soluções com software e IA**, sempre buscando unir conhecimento técnico com problemas reais de negócio.
+`Next.js` · `React` · `TypeScript` · `Moodle Web Services` · `PDF/CSV`
 
-## 📫 Entre em contato
+Moodle auditing and reporting platform for locating course-completion issues and generating professional reports, joining LMS expertise with web development, API integration, and analysis automation.
 
-* 💼 LinkedIn: **Mateus Menezes**
-* 🐙 GitHub: **[@MateusMenezes02](https://github.com/MateusMenezes02)**
+```sh
+mateus@github:~$ cat experience.txt
+```
+
+```text
+2023 ─────────────────────────────────────────────────────── Present
+
+Educational technology / LMS
+  Moodle operations · Python automation · Playwright
+  User and course management · reporting · data processing
+  Educational technology workflows
+```
+
+```sh
+mateus@github:~$ ./contact.sh
+```
+
+GitHub · [@MateusMenezes02](https://github.com/MateusMenezes02)
+
+<!--
+Setup: place a portrait at source/profile.jpg, then run:
+  pip install -r scripts/requirements-photo.txt
+  python scripts/prep_photo.py source/profile.jpg source/prepared.png
+  python scripts/make_ascii_svg.py source/prepared.png
+
+For contribution data, run:
+  GITHUB_USERNAME=MateusMenezes02 python scripts/fetch_contributions.py
+  python scripts/render_heatmap_svg.py
+-->

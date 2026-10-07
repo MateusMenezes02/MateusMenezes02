@@ -1,0 +1,50 @@
+import importlib.util
+from datetime import date, timedelta
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+spec = importlib.util.spec_from_file_location("fetch", ROOT / "scripts" / "fetch_contributions.py")
+fetch = importlib.util.module_from_spec(spec); spec.loader.exec_module(fetch)
+render_spec = importlib.util.spec_from_file_location("render", ROOT / "scripts" / "render_heatmap_svg.py")
+render = importlib.util.module_from_spec(render_spec); render_spec.loader.exec_module(render)
+
+
+def days(counts):
+    return [{"date": f"2026-01-{i + 1:02d}", "count": count, "level": min(count, 4)} for i, count in enumerate(counts)]
+
+
+def test_stats_calculates_streaks_best_day_and_months():
+    stats = fetch.calculate_stats(days([0, 2, 1, 0, 4, 5]))
+    assert stats["total"] == 12
+    assert stats["current_streak"] == 2
+    assert stats["longest_streak"] == 2
+    assert stats["best_day"] == {"date": "2026-01-06", "count": 5, "level": 4}
+    assert stats["monthly_totals"] == {"2026-01": 12}
+
+
+def test_parser_rejects_unexpected_html():
+    try:
+        fetch.parse_contributions("<html></html>")
+    except ValueError as error:
+        assert "No contribution calendar" in str(error)
+    else:
+        raise AssertionError("Parser accepted invalid markup")
+
+
+def test_parser_uses_tooltip_totals():
+    cells = "".join(f'<td class="ContributionCalendar-day" id="d{i}" data-date="{date(2025, 1, 1) + timedelta(days=i)}" data-level="{1 if i == 0 else 0}"></td>' for i in range(350))
+    tips = '<tool-tip for="d0">2 contributions on January 1st.</tool-tip>' + "".join(
+        f'<tool-tip for="d{i}">No contributions on January {i + 1}th.</tool-tip>' for i in range(1, 350)
+    )
+    parsed = fetch.parse_contributions(cells + tips)
+    assert parsed[0]["count"] == 2
+    assert parsed[1]["count"] == 0
+
+
+def test_heatmap_svg_uses_levels_and_accessible_summary():
+    payload = {"days": days([0, 1, 2, 3, 4]), "stats": fetch.calculate_stats(days([0, 1, 2, 3, 4]))}
+    svg = render.svg_for(payload, "dark")
+    assert 'viewBox="0 0 860 210"' in svg
+    assert "GitHub contribution activity" in svg
+    assert render.THEMES["dark"]["empty"] in svg
+    assert render.THEMES["dark"]["levels"][3] in svg

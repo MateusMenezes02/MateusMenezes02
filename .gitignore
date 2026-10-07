@@ -1,0 +1,13 @@
+# Python caches and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local virtual environments and scratch work
+.venv/
+venv/
+work/
+
+# Operating-system files and photo-processing intermediates
+.DS_Store
+source/prepared.png
