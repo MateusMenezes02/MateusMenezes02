@@ -20,9 +20,9 @@ mateus@github:~$ whoami
   <tr>
     <td valign="top">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./assets/ascii-v3-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="./assets/ascii-v3-light.svg">
-        <img src="./assets/ascii-v3-dark.svg" width="350" alt="ASCII portrait status for Mateus Menezes.">
+        <source media="(prefers-color-scheme: dark)" srcset="./assets/boot-card-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="./assets/boot-card-light.svg">
+        <img src="./assets/boot-card-dark.svg" width="350" alt="Animated terminal boot sequence for Mateus Menezes profile.">
       </picture>
     </td>
     <td valign="top">
